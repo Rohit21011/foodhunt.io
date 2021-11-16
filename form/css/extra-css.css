@@ -1143,6 +1143,11 @@ height: 200px;
   border-radius: 20px;
   /* background-color: #fbf7e8; */
 }
+@media only screen and (max-width:992px) {
+  .category-layout{
+    max-width: fit-content !important;
+  }
+}
 
 .category-background{
   height: 300px;
@@ -1210,4 +1215,17 @@ a .active{
 .show-active-link a{
  
     color: black !important;
+}
+.sorting select{
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  background-color: #fbf7e8;
+  padding-top: 13px;
+  padding-left: 13px;
+  padding-bottom: 13px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: #fbf7e8;
+
 }

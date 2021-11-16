@@ -24,7 +24,17 @@
     </div>
     <div class="container-fluid">
         <div class="row justify-content-around">
-            <div class="col-lg-2 ml-3 d-sm-block d-none category-layout ">
+            <form class="d-block d-md-none sorting" >
+                <select name="category" id="select">
+                    <option value="all">All</option>
+                    <option value="burger">Burger</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="non-veg">Non-veg</option>
+
+                    <option value="cold-drinks">Cold Drinks</option>
+                </select>
+            </form>
+            <div class="col-2 ml-3 d-none d-md-block  category-layout ">
                 <h5 class="mt-2 ml-3">Categories</h5>
 
                 <ul class="category-background">
@@ -65,7 +75,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-9 ml-4">
+            <div class="col-12 col-md-9 " style=""> 
                 <div class="row justify-content-around" id="show-all-products">
 
                 </div>
@@ -78,6 +88,23 @@
 
         </ul>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#select").on("change",function(){
+            var category=$("#select").val();
+            var url="product-categories.php";
+                window.open(url+"?id="+category,"_parent");
+        });
+        });
+        
+            
+            
+                
+        
+
+    
+        
+    </script>
     <script src="form/js/pagination.js"></script>
     <script src="form/js/count-products.js"></script>
 

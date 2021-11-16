@@ -26,7 +26,18 @@
     </div>
     <div class="container-fluid">
         <div class="row justify-content-around">
-            <div class="col-lg-2 ml-3 d-sm-block d-none category-layout ">
+        <form class="d-block d-md-none sorting" >
+        <select name="category" id="select" >
+                    <option value="all" >All</option>
+                    <option value="burger">Burger</option>
+                    <option value="pizza">Pizza</option>
+                    <option value="non-veg">Non-veg</option>
+
+                    <option value="cold-drinks">Cold Drinks</option>
+                </select>
+            </form>
+            <div class="col-2 ml-3 d-none d-md-block  category-layout ">
+
                 <h5 class="mt-2 ml-3">Categories</h5>
 
                 <ul class="category-background">
@@ -83,9 +94,24 @@
     </div>
     <script src="form/js/count-products.js"></script>
     <script>
-    $(document).ready(function() {
         
+            
+       
+    $(document).ready(function() {
+        $("#select").on("change",function(){
+
+            var cat=$("#select").val();
+            if(cat!="all"){
+                getData(cat);
+            }
+            else{
+                window.open("shop.php","_parent");
+            }
+            
+        });
         var category = "<?php echo $_GET['id'];?>";
+       
+        $(" #select  [ value="+category+"]").attr("selected","selected");   
         $("#"+category).parent().removeClass("show-active-link");
         $("#"+category).parent().addClass("show-active-link");
         getData(category);
@@ -141,6 +167,7 @@
             });
 
         }
+        
         $(".product-category a").click(function(){
       var prod_name=$(this).attr("id");
       $(".about-link").html(prod_name);
@@ -152,6 +179,7 @@
 
 
     });
+        
     </script>
     <?php include('footer.php');?>
 </body>
