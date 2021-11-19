@@ -24,8 +24,9 @@ $(document).ready(function() {
                                
                                     <img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> 
                                 </div>
+                                
                                 <div class=" col-2 wishlist">
-                                    <i class="fa fa-heart"></i>
+                                    <i class="fa fa-heart" prod_id="${value.product_id}" ></i>
                                 </div>
                             </div>
                             <div class="row">

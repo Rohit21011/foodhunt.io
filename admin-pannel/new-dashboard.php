@@ -98,8 +98,8 @@
                                         <label for="product-price" class="mt-2">Product price</label>
                                         <input type="number" name="p_price" class="form-control" id="product-price">
 
-                                        <label for="product-ratting" step="0.01" class="mt-2">Product ratting</label>
-                                        <input type="number" name="p_ratting" class="form-control" id="product-ratting">
+                                        <label for="product-ratting"  class="mt-2">Product ratting</label>
+                                        <input type="number" name="p_ratting" step="0.01" class="form-control" id="product-ratting">
 
                                         <label for="product-info" class="mt-2">Product description</label>
                                         <textarea name="p_description" id="product-info" class="form-control" cols="5"

@@ -21,7 +21,7 @@
 <body style="height:100%">
 
     <div class="d-flex justify-content-center">
-        <img src="image/food-logo1.png" width="250px" alt="">
+        <img src="img/food-logo1.png" width="250px" alt="">
     </div>
     <div class="container">
 

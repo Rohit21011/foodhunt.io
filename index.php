@@ -161,22 +161,22 @@
                     <!-- Burger-->
                     <div class="tab-pane fade " id="burger">
                         <div class="row justify-content-around" id="burger-details">
-                            
+
                         </div>
                     </div>
                     <!-- DESRTS-->
                     <div class="tab-pane fade " id="deserts">
-                         <div class="row justify-content-around" id="deserts-details">
+                        <div class="row justify-content-around" id="deserts-details">
 
-                            
-                        </div> 
+
+                        </div>
                     </div>
                     <!-- non-veg-->
                     <div class="tab-pane fade " id="non-veg">
                         <div class="row justify-content-around" id="nonveg-details">
 
-                           
-                        </div> 
+
+                        </div>
                     </div>
                 </div>
 
@@ -403,12 +403,9 @@
     </div>
 
     <script src="form/js/fetch-products-by-category.js"></script>
-    <!--container 2 starts-->
 
+    <script src="form/js/fetch-wishlist.js"></script>
 
-    <!--container 2 ends-->
-
-    <!--footer primary-->
 
     <?php
 			include("footer.php");

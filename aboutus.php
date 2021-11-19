@@ -126,7 +126,7 @@
     <div class="container " style="position:relative;top: 10%;">
         <div class="row mt-5 justify-content-center">
             <div class="col-lg-5 col-8">
-                <img width="100%" src="image/our-shef.png" alt=""
+                <img width="100%" src="img/our-shef.png" alt=""
                     style="filter: drop-shadow(30px 30px 20px rgba(0, 0, 0, 0.15));">
             </div>
             <div class="col-lg-5 col-8">
@@ -144,13 +144,13 @@
      <h1 class="title text-center">Our talented shefs</h1>
         <div class="row justify-content-md-around justify-content-center ">
             <div class="col-lg-3 col-md-4 col-12">
-                <img class="rounded-circle our-shef" width="300px" height="300px" src="image/shef1.jpg">
+                <img class="rounded-circle our-shef" width="300px" height="300px" src="img/shef1.jpg">
             </div>
             <div class="col-lg-3 col-md-4 col-12">
-                <img class="rounded-circle our-shef" width="300px" height="300px" src="image/shef2.jpg">
+                <img class="rounded-circle our-shef" width="300px" height="300px" src="img/shef2.jpg">
             </div>
             <div class="col-lg-3 col-md-4 col-12">
-                <img class="rounded-circle our-shef" width="300px" height="300px" src="image/shef3.jpg">
+                <img class="rounded-circle our-shef" width="300px" height="300px" src="img/shef3.jpg">
             </div>
         </div> 
     </div>

@@ -25,92 +25,103 @@
         </div>
     </div>
     <div class="container-fluid" style="position:relative;">
-        <div class="row  justify-content-around">
-            <div class="col-lg-3  col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
-                <div class="d-flex">
-
-                    <img width="200px" height="200px" src="image/special-bergur3.png" alt="">
-
-                    <div class="mt-5 ml-2">
-                        <p class="heading-h3">Cheese Butter</p>
-                      
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star "></span>
-                        
-                        <p class="heading-h3 mt-2" style="font-size:25px">₹ 120/-</p>
-                        <p class="heading-h3" style="font-size:14px">Order it now </p>
-                        <p class="text-success" style="font-size:14px">In stock </p>
-
-
-                    </div>
-
-
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="Add-to-cart.php" type="button" role="button" class=" remove-from-wishlist-btn  "
-                        style="width:32%">Remove</a>
-                    <a href="Add-to-cart.php" type="button" role="button" class=" add-to-cart-btn  "
-                        style="width:32%">Add to cart</a>
-                </div>
-
-
-
-            </div>
-            <div class="col-lg-3 col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
-                <div class="d-flex">
-                    <img width="200px" height="200px" src="image/indian-thali.png" alt="">
-                    <div class="mt-5 ml-2">
-                        <p class="heading-h3">Cheese Butter</p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star "></span>
-                        <p class="heading-h3 mt-2" style="font-size:25px">₹ 120/-</p>
-                        <p class="heading-h3" style="font-size:14px">Order it now </p>
-                        <p class="text-success" style="font-size:14px">In stock </p>
-
-                    </div>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="Add-to-cart.php" type="button" role="button" class=" remove-from-wishlist-btn  "
-                        style="width:32%">Remove</a>
-                    <a href="Add-to-cart.php" type="button" role="button" class=" add-to-cart-btn  "
-                        style="width:32%">Add to cart</a>
-                </div>
-            </div>
-            <div class="col-lg-3  col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
-                <div class="d-flex">
-                    <img width="200px" height="200px" src="image/festival-special.jpg" alt="">
-                    <div class="mt-5 ml-2">
-                        <p class="heading-h3">Cheese Butter</p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star "></span>
-                        <p class="heading-h3 mt-2" style="font-size:25px">₹ 120/-</p>
-                        <p class="heading-h3" style="font-size:14px">Order it now </p>
-                        <p class="text-success" style="font-size:14px">In stock </p>
-
-
-                    </div>
-
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="remove-from-wishlist.php" type="button" role="button" class=" remove-from-wishlist-btn  "
-                        style="width:32%">Remove</a>
-                    <a href="Add-to-cart.php" type="button" role="button" class=" add-to-cart-btn  "
-                        style="width:32%">Add to cart</a>
-                </div>
-            </div>
+        <div class="row  justify-content-around" id="show-wishlist">
+          
 
         </div>
 
     </div>
+
+    <script>
+    $(document).ready(function() {
+        var str = "";
+        $.ajax({
+            url: "api/fetch-wishlist.php",
+            type: "POST",
+            dataType: "JSON",
+            success: function(data) {
+                console.log(data);
+                $.each(data, function(key, value) {
+                    str += `<div class="col-lg-3  col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
+                <div class="d-flex">
+
+                    <img width="200px" height="200px" src="image/${value.product_image}" alt="">
+
+                    <div class="mt-5 ml-2">
+                        <p class="heading-h3">${value.product_name}</p>
+
+                        <p class="price">${value.product_ratting}/5</p>
+
+                        <p class="heading-h3 mt-2" style="font-size:25px">₹${value.product_price}/-</p>
+                        <p class="heading-h3" style="font-size:14px">Order it now </p>
+                        <p class="text-success" style="font-size:14px">In stock </p>
+
+
+                    </div>
+
+
+                </div>
+                <div class="d-flex justify-content-around" id="${value.product_id}">
+                    <a href="" type="button" role="button" class="remove-from-wishlist-btn " 
+                        style="width:32%">Remove</a>
+                    <a href="" type="button" role="button" class=" add-to-cart-btn  "
+                        style="width:32%">Add to cart</a>
+                </div>
+
+
+
+            </div>`;
+
+                });
+                $("#show-wishlist").append(str);
+            }
+        });
+        $(document).on("click",".remove-from-wishlist-btn ",function(e) {
+            e.preventDefault();
+            var wishlist_id=$(this).parent().attr("id");
+            console.log(wishlist_id);
+            $.ajax({
+                 url:"api/remove-wishlist.php",
+                 type:"POST",
+                 data:{wishlist_id:wishlist_id},
+                 dataType:"JSON",
+                 success:function(data){
+                     if(data==1){
+                        console.log(data);
+                        $("#"+wishlist_id).closest('.wishlist-cards').remove();
+                     }
+                     else{
+                         console.log("error");
+                     }
+                        
+                 }
+            });
+        });
+
+        $(document).on("click",".add-to-cart-btn ",function(e) {
+            console.log("click");
+            e.preventDefault();
+            var wishlist_id=$(this).parent().attr("id");
+            console.log(wishlist_id);
+            $.ajax({
+                 url:"api/add-to-cart.php",
+                 type:"POST",
+                 data:{wishlist_id:wishlist_id},
+                 dataType:"JSON",
+                 success:function(data){
+                     if(data==1){
+                        console.log(data);
+                        $("#"+wishlist_id).closest('.wishlist-cards').remove();
+                     }
+                     else{
+                         console.log("error");
+                     }
+                        
+                 }
+            });
+        });
+    });
+    </script>
     <?php include('footer.php');?>
 </body>
 

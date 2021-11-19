@@ -19,7 +19,7 @@
 <body style="height:100%">
     <!-- <h3 class="text-center mt-5" style="text-shadow:5px 5px 10px gray; color: green;font-size: 30px;font-weight:bold;font-family: 'Orbitron', sans-serif;">Food hunt</h3><br> -->
     <div class="d-flex justify-content-center mt-5">
-        <img src="image/food-logo1.png" width="250px" alt="">
+        <img src="img/food-logo1.png" width="250px" alt="">
     </div>
     <div class="container">
 
