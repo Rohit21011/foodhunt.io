@@ -50,7 +50,7 @@
                     <div class="mt-5 ml-2">
                         <p class="heading-h3">${value.product_name}</p>
 
-                        <p class="price">${value.product_ratting}/5</p>
+                       
 
                         <p class="heading-h3 mt-2" style="font-size:25px">₹${value.product_price}/-</p>
                         <p class="heading-h3" style="font-size:14px">Order it now </p>
@@ -104,7 +104,7 @@
             var wishlist_id=$(this).parent().attr("id");
             console.log(wishlist_id);
             $.ajax({
-                 url:"api/add-to-cart.php",
+                 url:"api/add-to-cart-from-wishlist.php",
                  type:"POST",
                  data:{wishlist_id:wishlist_id},
                  dataType:"JSON",

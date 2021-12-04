@@ -96,15 +96,10 @@
                 window.open(url+"?id="+category,"_parent");
         });
         });
-        
-            
-            
-                
-        
-
-    
-        
+         
     </script>
+
+
     <script src="form/js/pagination.js"></script>
     <script src="form/js/count-products.js"></script>
 

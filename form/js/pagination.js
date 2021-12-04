@@ -1,7 +1,7 @@
 $(document).ready(function() { 
     var page_no=1;
     getData(page_no);
-    
+   
     function getData(page_no) {
         var str = "";
         $.ajax({
@@ -22,7 +22,7 @@ $(document).ready(function() {
                                 <img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> 
                             </div>
                             <div class=" col-2 wishlist">
-                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-heart" prod_id="${value.product_id}"></i>
                             </div>
                         </div>
                         <div class="row">
@@ -30,7 +30,7 @@ $(document).ready(function() {
                                 <p class="price">${value.product_ratting}/5</p>
                                 <h3 class="heading-h3" id="pizza-name">${value.product_name}</h3>
                                 <div class="short-description" id="pizza-description">${value.product_description}</div>
-                                <a href="add-to-cart.php"><i class="fas fa-shopping-basket add-to-cart"></i></a>
+                                <a href=""><i class="fas fa-shopping-basket add-to-cart" id="${value.product_id}"></i></a>
                                 <span class="price" style="float: left; " id="pizza-price">₹${value.product_price}/-</span>
 
 
@@ -41,7 +41,19 @@ $(document).ready(function() {
                     });
                     $("#show-all-products").append(str);
                 
-                
+                    $.ajax({
+                        url: "api/fetch-wishlist.php",
+                        dataType: "JSON",
+                        success: function(data) {
+                           
+                            $.each(data, function(key, value) {
+                              console.log(value.product_id);
+                    
+                                $(".wishlist [prod_id=" + value.product_id + "]").css("color", "red");
+                            });
+                        }
+                    
+                    });
 
 
             }
@@ -49,6 +61,9 @@ $(document).ready(function() {
         });
 
     }
+    
+    
+
     
     pagination();
     function pagination() {
@@ -66,7 +81,8 @@ $(document).ready(function() {
 
         });
         
-
+        
+        
       
     }
     $(document).on("click","#pagination a",function(e){
@@ -76,6 +92,61 @@ $(document).ready(function() {
        $("#pagination a").removeClass("active");
        $(this).addClass("active");
 
+       
+
     });
+    $(document).on("click", ".wishlist i", function() {
+
+        var prod_id = $(this).attr("prod_id");
+        var product_details="product_details";
+        console.log(prod_id);
+        $.ajax({
+            url: "api/add-wishlist.php",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                prod_id: prod_id
+            },
+            success: function(data) {
+                if (data==1) {
+                    
+                    $(".wishlist [prod_id=" + prod_id+ "]").css("color", "red");
+    
+                } else {
+                    alert("no");
+                }
+            }
+        });
+    
+    });
+    $(document).on("click", "a .add-to-cart", function(e) {
+        e.preventDefault();
+
+        var prod_id = $(this).attr("id");
+        console.log(prod_id);
+        $.ajax({
+            url: "api/add-to-cart-main.php",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                prod_id: prod_id
+            },
+            success: function(data) {
+                if (data == 1) {
+
+                    alert("product added to your cart successfully");
+
+                } else {
+                    alert("This item already in cart");
+                }
+            }
+        });
+
+    });
+    
+});
+
+
+$(document).ready(function() {
     
 });

@@ -30,11 +30,11 @@ $(document).ready(function() {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col">
+                                <div class="col " >
                                     <p class="price">${value.product_ratting}/5</p>
                                     <h3 class="heading-h3" id="pizza-name">${value.product_name}</h3>
                                     <div class="short-description" id="pizza-description">${value.product_description}</div>
-                                    <a href="add-to-cart.php"><i class="fas fa-shopping-basket add-to-cart"></i></a>
+                                    <a href=""><i class="fas fa-shopping-basket add-to-cart"  id="${value.product_id}"></i></a>
                                     <span class="price" style="float: left; " id="pizza-price">₹${value.product_price}/-</span>
 
 

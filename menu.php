@@ -49,7 +49,7 @@
         </ul>
         <div class="row justify-content-around " id="show-breakfast">
 
-            
+
         </div>
     </div>
     <!-- Lunch -->
@@ -57,7 +57,7 @@
 
         <h2 class=" tab-titles-lg">Lunch<i class="far fa-arrow-alt-circle-right"></i> </h2>
         <div class="row justify-content-around " id="show-lunch">
-            
+
         </div>
     </div>
     <!-- Dinner -->
@@ -66,10 +66,11 @@
         <h2 class=" tab-titles-lg">Dinner<i class="far fa-arrow-alt-circle-right"></i> </h2>
         <div class="row justify-content-around " id="show-dinner">
 
-           
+
         </div>
     </div>
     <?php include("footer.php");?>
+
     <script>
     $(document).ready(function() {
         var category = "break-fast";
@@ -86,13 +87,13 @@
                 },
                 dataType: "JSON",
                 success: function(data) {
-                   console.log(data);
+                    console.log(data);
                     $.each(data, function(key, value) {
                         str += `<div class="ml-1 mt-5 col-lg-2 col-md-3 col-sm-5 col-9  menu-card">
-                <img src="menu-image/${value.menu_image}" class="mt-5 set-height">
-                <i class="far fa-heart"></i>
+                <img src="image/${value.menu_image}" class="mt-5 set-height">
+                <i class="far fa-heart wishlist" prod_id="${value.menu_id}"></i>
 
-                <a href="add-to-cart.php"><i class="fas fa-shopping-basket  menu-cart"></i></a>
+                <a href=""><i class="fas fa-shopping-basket  menu-cart" id="${value.menu_id}"></i></a>
                 <div>
                     <p>₹ ${value.menu_price}/-</p>
                 </div>
@@ -105,21 +106,89 @@
             });
         }
         lunch();
-        function lunch(){
-            var category="lunch";
-            var display="#show-lunch";
-            getData(category,display);
+
+        function lunch() {
+            var category = "lunch";
+            var display = "#show-lunch";
+            getData(category, display);
         }
         breakfast();
-        function breakfast(){
-            
-            var category="dinner";
-            var display="#show-dinner";
-            getData(category,display);
+
+        function breakfast() {
+
+            var category = "dinner";
+            var display = "#show-dinner";
+            getData(category, display);
         }
 
+        $(document).on("click", ".wishlist", function() {
+
+            var prod_id = $(this).attr("prod_id");
+            var menu = "menu";
+            console.log(prod_id);
+            $.ajax({
+                url: "api/fetch-wishlist-for-menu.php",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    prod_id: prod_id,
+
+                },
+                success: function(data) {
+                    if (data == 1) {
+
+                        $("[prod_id=" + prod_id + "]").css("color", "red");
+
+                    } else {
+                        alert("no");
+                    }
+                }
+            });
+
+        });
+        $(document).on("click", "a .menu-cart", function(e) {
+            e.preventDefault();
+
+            var prod_id = $(this).attr("id");
+            console.log(prod_id);
+            $.ajax({
+                url: "api/add-to-cart-from-menu.php",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    prod_id: prod_id
+                },
+                success: function(data) {
+                    if (data == 1) {
+
+                        alert("product added to your cart successfully");
+
+                    } else {
+                        alert("This item already in cart");
+                    }
+                }
+            });
+
+        });
+
+    });
+    $(document).ready(function() {
+        $.ajax({
+            url: "api/fetch-wishlist.php",
+            dataType: "JSON",
+            success: function(data) {
+
+                $.each(data, function(key, value) {
+                    console.log(value.product_id);
+
+                    $(" [prod_id=" + value.product_id + "]").css("color", "red");
+                });
+            }
+
+        });
     });
     </script>
+    <script src="form/js/fetch-wishlist.js"></script>
 </body>
 
 </html>

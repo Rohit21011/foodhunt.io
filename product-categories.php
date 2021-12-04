@@ -26,9 +26,9 @@
     </div>
     <div class="container-fluid">
         <div class="row justify-content-around">
-        <form class="d-block d-md-none sorting" >
-        <select name="category" id="select" >
-                    <option value="all" >All</option>
+            <form class="d-block d-md-none sorting">
+                <select name="category" id="select">
+                    <option value="all">All</option>
                     <option value="burger">Burger</option>
                     <option value="pizza">Pizza</option>
                     <option value="non-veg">Non-veg</option>
@@ -94,26 +94,22 @@
     </div>
     <script src="form/js/count-products.js"></script>
     <script>
-        
-            
-       
     $(document).ready(function() {
-        $("#select").on("change",function(){
+        $("#select").on("change", function() {
 
-            var cat=$("#select").val();
-            if(cat!="all"){
+            var cat = $("#select").val();
+            if (cat != "all") {
                 getData(cat);
+            } else {
+                window.open("shop.php", "_parent");
             }
-            else{
-                window.open("shop.php","_parent");
-            }
-            
+
         });
         var category = "<?php echo $_GET['id'];?>";
-       
-        $(" #select  [ value="+category+"]").attr("selected","selected");   
-        $("#"+category).parent().removeClass("show-active-link");
-        $("#"+category).parent().addClass("show-active-link");
+
+        $(" #select  [ value=" + category + "]").attr("selected", "selected");
+        $("#" + category).parent().removeClass("show-active-link");
+        $("#" + category).parent().addClass("show-active-link");
         getData(category);
         //  var id=$("a[href$='#pizza']").val("pizza");
         function getData(category) {
@@ -139,7 +135,7 @@
                                 <img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> 
                             </div>
                             <div class=" col-2 wishlist">
-                                <i class="fa fa-heart"></i>
+                                <i class="fa fa-heart" prod_id="${value.product_id}"></i>
                             </div>
                         </div>
                         <div class="row">
@@ -147,7 +143,7 @@
                                 <p class="price">${value.product_ratting}/5</p>
                                 <h3 class="heading-h3" id="pizza-name">${value.product_name}</h3>
                                 <div class="short-description" id="pizza-description">${value.product_description}</div>
-                                <a href="add-to-cart.php"><i class="fas fa-shopping-basket add-to-cart"></i></a>
+                                <a href="add-to-cart.php"><i class="fas fa-shopping-basket add-to-cart" id="${value.product_id}"></i></a>
                                 <span class="price" style="float: left; " id="pizza-price">₹${value.product_price}/-</span>
 
 
@@ -161,26 +157,89 @@
 
                     });
                     $("#show-all-products").append(str);
+
+                    $.ajax({
+                        url: "api/fetch-wishlist.php",
+                        dataType: "JSON",
+                        success: function(data) {
+
+                            $.each(data, function(key, value) {
+                                console.log(value.product_id);
+
+                                $(".wishlist [prod_id=" + value.product_id +
+                                    "]").css("color", "red");
+                            });
+                        }
+
+                    });
                 }
 
 
             });
 
         }
-        
-        $(".product-category a").click(function(){
-      var prod_name=$(this).attr("id");
-      $(".about-link").html(prod_name);
-      $(".product-category").removeClass("show-active-link");
-        $("#"+prod_name).parent().addClass("show-active-link");
-      getData(prod_name);
+
+        $(".product-category a").click(function() {
+            var prod_name = $(this).attr("id");
+            $(".about-link").html(prod_name);
+            $(".product-category").removeClass("show-active-link");
+            $("#" + prod_name).parent().addClass("show-active-link");
+            getData(prod_name);
         });
 
+        $(document).on("click", ".wishlist i", function() {
 
+            var prod_id = $(this).attr("prod_id");
+            var product_details = "product_details";
+            console.log(prod_id);
+            $.ajax({
+                url: "api/add-wishlist.php",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    prod_id: prod_id
+                },
+                success: function(data) {
+                    if (data == 1) {
+
+                        $(".wishlist [prod_id=" + prod_id + "]").css("color", "red");
+
+                    } else {
+                        alert("no");
+                    }
+                }
+            });
+
+        });
+
+        $(document).on("click", "a .add-to-cart", function(e) {
+        e.preventDefault();
+
+        var prod_id = $(this).attr("id");
+        console.log(prod_id);
+        $.ajax({
+            url: "api/add-to-cart-main.php",
+            type: "POST",
+            dataType: "JSON",
+            data: {
+                prod_id: prod_id
+            },
+            success: function(data) {
+                if (data == 1) {
+
+                    alert("product added to your cart successfully");
+
+                } else {
+                    alert("This item already in cart");
+                }
+            }
+        });
 
     });
-        
+
+    });
     </script>
+
     <?php include('footer.php');?>
 </body>
 
