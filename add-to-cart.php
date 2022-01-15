@@ -33,7 +33,7 @@
 
     </div>
     <div class=" float-left  cart-container " id="show-cart">
-
+   <span id="isEmpty"></span>
     </div>
 
     <div class="d-lg-block d-none float-right mr-4" style="background:white;width:22%;height:180px !important">
@@ -48,15 +48,28 @@
 
     <script>
     $(document).ready(function() {
+
+        var customer_mobile = sessionStorage.getItem('customer_id');
         var str = "";
         $.ajax({
             url: "api/fetch-cart-items.php",
             type: "POST",
+            data: {
+                customer_mobile: customer_mobile
+            },
             dataType: "JSON",
+
             success: function(data) {
                 console.log(data);
-                $.each(data, function(key, value) {
-                    str += `<div class="row ">
+                if (JSON.stringify(data) === '[]') {
+                    var cart="";
+                    cart+=`<i class="fa fa-shopping-cart isEmpty"></i>
+                    <div style="font-size: 25px;font-family: "poppins-bold", sans-serif;"><p >your cart is empty</p></div>`;
+                    $("#isEmpty").append(cart);
+
+                } else {
+                    $.each(data, function(key, value) {
+                        str += `<div class="row ">
 
 <div class="col ml-sm-5" >
     <div class="d-flex ">
@@ -90,7 +103,8 @@
 
 </div>
 </div>`;
-                });
+                    });
+                }
                 $("#show-cart").append(str);
             }
         });
@@ -101,10 +115,12 @@
             $.ajax({
                 url: "api/delete-cart-items.php",
                 type: "POST",
-                data:{id:id},
-                success:function(data){
-                 console.log(data);
-                 $("#"+id).closest('.row').remove();
+                data: {
+                    id: id
+                },
+                success: function(data) {
+                    console.log(data);
+                    $("#" + id).closest('.row').remove();
                 }
             });
         });

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connect.php");
 $phone=$_POST['phone'];
 $password=$_POST['password'];
@@ -9,6 +10,8 @@ if (mysqli_num_rows($login) == 0){
     echo 0;
 }
 else{
-    echo 1;
+    $_SESSION['customer_id']=$phone;
+    echo $_SESSION['customer_id'];
 }
+
 ?>

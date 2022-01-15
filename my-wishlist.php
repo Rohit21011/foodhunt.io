@@ -34,10 +34,12 @@
 
     <script>
     $(document).ready(function() {
+        var customer_mobile=sessionStorage.getItem('customer_id');
         var str = "";
         $.ajax({
             url: "api/fetch-wishlist.php",
             type: "POST",
+            data:{customer_mobile:customer_mobile},
             dataType: "JSON",
             success: function(data) {
                 console.log(data);
@@ -83,7 +85,7 @@
             $.ajax({
                  url:"api/remove-wishlist.php",
                  type:"POST",
-                 data:{wishlist_id:wishlist_id},
+                 data:{wishlist_id:wishlist_id,customer_mobile:customer_mobile},
                  dataType:"JSON",
                  success:function(data){
                      if(data==1){
@@ -99,14 +101,15 @@
         });
 
         $(document).on("click",".add-to-cart-btn ",function(e) {
-            console.log("click");
+            
             e.preventDefault();
+            var mobile=sessionStorage.getItem('customer_id');
             var wishlist_id=$(this).parent().attr("id");
             console.log(wishlist_id);
             $.ajax({
                  url:"api/add-to-cart-from-wishlist.php",
                  type:"POST",
-                 data:{wishlist_id:wishlist_id},
+                 data:{wishlist_id:wishlist_id,customer_mobile:mobile},
                  dataType:"JSON",
                  success:function(data){
                      if(data==1){

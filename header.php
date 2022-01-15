@@ -72,7 +72,7 @@ $(document).ready(function() {
                             class="nav-link nav-links">About</a></li>
                     <li class="nav-item custom-active"><a href="contact.php" class="nav-link nav-links">Contact</a></li>
                     <ul class="d-flex nav-col ">
-                        <li class="nav-item ml-3 ml-lg-0"><a class="nav-link login " href="#" data-toggle="popover"
+                        <li class="nav-item ml-3 ml-lg-0"><a class="nav-link login " id="customer_id" href="#" data-toggle="popover"
                                 data-placement="bottom"
                                 data-content=" <a href='sign_in.php' class='sign-in'>Sign in</a><br>new user? <a href='new-account.php'>create new account</a>"
                                 data-html="true"><i class="fas fa-user "></i></a><span
@@ -95,5 +95,20 @@ $(document).ready(function() {
 
 </header>
 
+<script>
+    $(document).ready(function(){
+        console.log(sessionStorage.getItem('customer_id'));
+        if(sessionStorage.getItem('customer_id')!=null){
+     $("#customer_id").attr("data-content","l<a href='my-orders.php'>My orders</a><br><a href='' id='destroy' >logout</a>");
+    
+       }
 
+      $(document).on("click","#destroy",function(){
+         
+        sessionStorage.removeItem('customer_id');
+          console.log("click");
+       
+      });
+    });
+</script>
 <a href="#" class="scrollToTop"><i class="fas fa-arrow-up"></i></a>

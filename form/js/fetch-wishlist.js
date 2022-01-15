@@ -1,13 +1,14 @@
-$(document).on("click", ".wishlist i", function() {
-
+$(document).on("click", ".wishlist i", function() { 
+    if(sessionStorage.getItem('customer_id')!=null){
+        var customer_phone=sessionStorage.getItem('customer_id');
     var prod_id = $(this).attr("prod_id");
-   
+    
     $.ajax({
         url: "api/add-wishlist.php",
         type: "POST",
         dataType: "JSON",
         data: {
-            prod_id: prod_id
+            prod_id: prod_id,customer_phone: customer_phone
         },
         success: function(data) {
             if (data==1) {
@@ -15,16 +16,19 @@ $(document).on("click", ".wishlist i", function() {
                 $(".wishlist [prod_id=" + prod_id+ "]").css("color", "red");
 
             } else {
-                alert("no");
+                alert("This item already in your wishlist");
             }
         }
     });
-
+    }
+    else
+    window.location.assign("sign_in.php");
 });
 
 $(document).on("click", "a .add-to-cart", function(e) {
 e.preventDefault();
-
+if(sessionStorage.getItem('customer_id')!=null){
+    var customer_phone=sessionStorage.getItem('customer_id')
     var prod_id = $(this).attr("id");
    console.log(prod_id);
     $.ajax({
@@ -32,7 +36,7 @@ e.preventDefault();
         type: "POST",
         dataType: "JSON",
         data: {
-            prod_id: prod_id
+            prod_id: prod_id,customer_phone:customer_phone
         },
         success: function(data) {
             if (data==1) {
@@ -44,11 +48,18 @@ e.preventDefault();
             }
         }
     });
+}
+else
+window.location.assign("sign_in.php");
+
 
 });
 $(document).ready(function() {
+   var session=sessionStorage.getItem('customer_id');
     $.ajax({
     url: "api/fetch-wishlist.php",
+    type:"POST",
+    data:{customer_mobile:session},
     dataType: "JSON",
     success: function(data) {
        

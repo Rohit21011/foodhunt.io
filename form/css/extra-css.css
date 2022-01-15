@@ -1230,3 +1230,11 @@ a .active{
   border-color: #fbf7e8;
 
 }
+ #isEmpty{
+  display: block;
+  background:none !important;
+  font-size: 165px;
+  
+  color: #585656;
+  text-align: center;
+}

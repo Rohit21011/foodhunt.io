@@ -1,5 +1,6 @@
 $(document).ready(function() { 
     var page_no=1;
+    var customer_mobile=sessionStorage.getItem('customer_id');
     getData(page_no);
    
     function getData(page_no) {
@@ -40,9 +41,12 @@ $(document).ready(function() {
                     </div>`;
                     });
                     $("#show-all-products").append(str);
-                
+                if(customer_mobile!=null){
+                    
                     $.ajax({
                         url: "api/fetch-wishlist.php",
+                        type:"POST",
+                        data:{customer_mobile:customer_mobile},
                         dataType: "JSON",
                         success: function(data) {
                            
@@ -54,6 +58,7 @@ $(document).ready(function() {
                         }
                     
                     });
+                }
 
 
             }
@@ -96,7 +101,7 @@ $(document).ready(function() {
 
     });
     $(document).on("click", ".wishlist i", function() {
-
+        if(customer_mobile!=null){
         var prod_id = $(this).attr("prod_id");
         var product_details="product_details";
         console.log(prod_id);
@@ -105,7 +110,7 @@ $(document).ready(function() {
             type: "POST",
             dataType: "JSON",
             data: {
-                prod_id: prod_id
+                prod_id: prod_id,customer_phone:customer_mobile
             },
             success: function(data) {
                 if (data==1) {
@@ -113,15 +118,18 @@ $(document).ready(function() {
                     $(".wishlist [prod_id=" + prod_id+ "]").css("color", "red");
     
                 } else {
-                    alert("no");
+                    alert("technical error");
                 }
             }
         });
-    
+        }
+        else{
+            window.location.assign("sign_in.php");
+        }
     });
     $(document).on("click", "a .add-to-cart", function(e) {
         e.preventDefault();
-
+        if(customer_mobile!=null){
         var prod_id = $(this).attr("id");
         console.log(prod_id);
         $.ajax({
@@ -129,7 +137,7 @@ $(document).ready(function() {
             type: "POST",
             dataType: "JSON",
             data: {
-                prod_id: prod_id
+                prod_id: prod_id,customer_phone:customer_mobile
             },
             success: function(data) {
                 if (data == 1) {
@@ -141,7 +149,10 @@ $(document).ready(function() {
                 }
             }
         });
-
+    }
+    else{
+        window.location.assign("sign_in.php");
+    }
     });
     
 });

@@ -75,6 +75,7 @@
     $(document).ready(function() {
         var category = "break-fast";
         var display = "#show-breakfast";
+        var customer_phone = sessionStorage.getItem('customer_id');
         getData(category, display);
 
         function getData(category, display) {
@@ -122,59 +123,73 @@
         }
 
         $(document).on("click", ".wishlist", function() {
+            if (customer_phone != null) {
 
-            var prod_id = $(this).attr("prod_id");
-            var menu = "menu";
-            console.log(prod_id);
-            $.ajax({
-                url: "api/fetch-wishlist-for-menu.php",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    prod_id: prod_id,
+                var prod_id = $(this).attr("prod_id");
+                var menu = "menu";
+                console.log(prod_id);
+                $.ajax({
+                    url: "api/fetch-wishlist-for-menu.php",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        prod_id: prod_id,
+                        customer_phone
 
-                },
-                success: function(data) {
-                    if (data == 1) {
+                    },
+                    success: function(data) {
+                        if (data == 1) {
 
-                        $("[prod_id=" + prod_id + "]").css("color", "red");
+                            $("[prod_id=" + prod_id + "]").css("color", "red");
 
-                    } else {
-                        alert("no");
+                        } else {
+                            alert("technical error");
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                window.location.assign("sign_in.php");
+            }
 
         });
         $(document).on("click", "a .menu-cart", function(e) {
             e.preventDefault();
+            if (customer_phone != null) {
+                
+                var prod_id = $(this).attr("id");
+                console.log(prod_id);
+                $.ajax({
+                    url: "api/add-to-cart-from-menu.php",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        prod_id: prod_id,customer_mobile:customer_phone
+                    },
+                    success: function(data) {
+                        if (data == 1) {
 
-            var prod_id = $(this).attr("id");
-            console.log(prod_id);
-            $.ajax({
-                url: "api/add-to-cart-from-menu.php",
-                type: "POST",
-                dataType: "JSON",
-                data: {
-                    prod_id: prod_id
-                },
-                success: function(data) {
-                    if (data == 1) {
+                            alert("product added to your cart successfully");
 
-                        alert("product added to your cart successfully");
-
-                    } else {
-                        alert("This item already in cart");
+                        } else {
+                            alert("This item already in cart");
+                        }
                     }
-                }
-            });
-
+                });
+            }
+            else{
+                window.location.assign("sign_in.php");
+            }
         });
 
     });
     $(document).ready(function() {
+        var customer_mobile = sessionStorage.getItem('customer_id');
         $.ajax({
             url: "api/fetch-wishlist.php",
+            type: "POST",
+            data: {
+                customer_mobile: customer_mobile
+            },
             dataType: "JSON",
             success: function(data) {
 

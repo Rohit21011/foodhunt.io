@@ -93,14 +93,17 @@ $("#form").submit(function(e){
             success:function(data){
                 if(data==1){
                
-                   
-                    $("#massage").addClass("alert-success").removeClass("alert-danger").html("You have successfully register");
+                    $("#massage").removeClass("alert-danger");
+                    $("#massage").addClass("alert-success").html("You have successfully register");
                     $("#form")[0].reset();
-                }else{
                    
+                }
+                else{
+                $("#massage").removeClass("alert-success");
                 $("#massage").addClass("alert-danger").html("duplicate record found");
                 $("#form")[0].reset();
-
+                
+                
                 }
             }
 });

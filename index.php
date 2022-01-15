@@ -402,7 +402,9 @@
         </div>
     </div>
 
-    <script src="form/js/fetch-products-by-category.js"></script>
+    <script src="form/js/fetch-products-by-category.js">
+        
+    </script>
 
     <script src="form/js/fetch-wishlist.js"></script>
 

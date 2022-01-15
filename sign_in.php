@@ -75,10 +75,15 @@
                  type:"POST",
                  data:{phone:phone,password:password},
                  success:function(data){
-                if(data==0)
+                if(data==0){
                  $("#login-error").addClass("alert-danger").html("unknown credentials");
-                 else
-                window.location.assign("index.php");
+                }
+                 else{
+                    sessionStorage.setItem('customer_id',data);
+                 console.log(sessionStorage.getItem('customer_id'));
+                 window.location.assign("index.php");
+                 }
+                 
                  }
              })
             }
