@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="d-lg-none d-block cart-container">
+    <!-- <div class="d-lg-none d-block cart-container">
         <h5 style="font-weight:normal" class=" text-center">Subtotal<span
                 style="font-family: 'Poppins', sans-serif ;font-weight:normal">(2 items):</span>₹ 320/-</h5>
         <a href="buy.php" type="button" role="button" class="p-2 add-to-cart-btn w-75 mt-4 " style="margin-left:30px">
@@ -31,12 +31,15 @@
         <span
             style="position: relative;display: inline-block;height: 1px;width: 95%;background-color: rgba(222, 224, 224, 0.925);"></span>
 
-    </div>
+    </div> -->
     <div class=" float-left  cart-container " id="show-cart">
-   <span id="isEmpty"></span>
+
+    </div>
+    <div id="checkout">
+
     </div>
 
-    <div class="d-lg-block d-none float-right mr-4" style="background:white;width:22%;height:180px !important">
+    <!-- <div class="d-lg-block d-none float-right mr-4" style="background:white;width:22%;height:180px !important">
         <h5 style="font-weight:normal" class="mt-5 text-center">Subtotal<span
                 style="font-family: 'Poppins', sans-serif ;font-weight:normal">(2 items):</span>₹ 320/-</h5>
         <a href="buy.php" type="button" role="button" class="p-2 add-to-cart-btn w-75 mt-4 " style="margin-left:35px">
@@ -44,7 +47,7 @@
 
 
 
-    </div>
+    </div> -->
 
     <script>
     $(document).ready(function() {
@@ -61,51 +64,71 @@
 
             success: function(data) {
                 console.log(data);
-                if (JSON.stringify(data) === '[]') {
-                    var cart="";
-                    cart+=`<i class="fa fa-shopping-cart isEmpty"></i>
-                    <div style="font-size: 25px;font-family: "poppins-bold", sans-serif;"><p >your cart is empty</p></div>`;
-                    $("#isEmpty").append(cart);
+                if (JSON.stringify(data) !== '[]') {
 
-                } else {
-                    $.each(data, function(key, value) {
-                        str += `<div class="row ">
+                    var count = 0;
+
+var total_price = 0;
+$.each(data, function(key, value) {
+
+    total_price = parseInt(total_price) + parseInt(value.product_price);
+    // console.log(total_price);
+    str += `<div class="row ">
 
 <div class="col ml-sm-5" >
-    <div class="d-flex ">
+<div class="d-flex ">
 
-        <img width="230px" height="230px" src="image/${value.product_image}" alt="">
+<img width="230px" height="230px" src="image/${value.product_image}" alt="">
 
-        <div class="mt-5 ml-2">
-            <p class="heading-h3">${value.product_name}</p>
-            <p class="heading-h3 mt-2" style="font-size:25px">₹ ${value.product_price}/-</p>
-            <p class="heading-h3" style="font-size:14px">Order it now</p>
-            <p class="text-success" style="font-size:14px">In stock</p>
-            <div class="wrap-elements">
-                <span class=" quantity">
+<div class="mt-5 ml-2">
+<p class="heading-h3">${value.product_name}</p>
+<p class="heading-h3 mt-2" style="font-size:25px">₹ ${value.product_price}/-</p>
+<p class="heading-h3" style="font-size:14px">Order it now</p>
+<p class="text-success" style="font-size:14px">In stock</p>
+<div class="wrap-elements">
+<span class=" quantity">
 
 
-                    <label for="dropdown" class="ml-3 mt-2">Qty</label>
-                    <select name="" id="dropdown" class="custome-select">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </span>
+<label for="dropdown" class="ml-3 mt-2">Qty</label>
+<select name="" id="dropdown"  class="custome-select">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select>
+</span>
 
-                <a href="#" class="ml-4 delete-btn"  id="${value.product_id}">Delete</a>
-                
-            </div>
-        </div>
+<a href="#" class="ml-4 delete-btn"  id="${value.product_id}">Delete</a>
 
-    </div>
+</div>
+</div>
+
+</div>
 
 </div>
 </div>`;
-                    });
+    var text = $(".custome-select option:selected").text();
+  
+    count++;
+
+
+
+});
+console.log(total_price);
+var checkout = `<div class="d-lg-block d-none float-right mr-4" style="background:white;width:22%;height:180px !important">
+<h5 style="font-weight:normal" class="mt-5 text-center" >Subtotal<span
+style="font-family: 'Poppins', sans-serif ;font-weight:bold" >(${count})</span><br>₹ ${total_price}/-</h5>
+<a href="buy.php" type="button" role="button" class="p-2 add-to-cart-btn w-75 mt-4 " style="margin-left:35px">
+Proceed to Checkout</a>
+
+
+
+</div>`;
+$("#checkout").append(checkout);
+$("#show-cart").append(str);
+
                 }
-                $("#show-cart").append(str);
+                
             }
         });
         $(document).on("click", ".delete-btn", function(e) {

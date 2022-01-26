@@ -36,6 +36,8 @@
     text-decoration: none;
 }
 </style>
+<script src="form/js/JsLocalSearch.js"></script>
+
 <script>
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover({
