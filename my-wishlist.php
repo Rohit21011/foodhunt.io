@@ -43,6 +43,7 @@
             dataType: "JSON",
             success: function(data) {
                 console.log(data);
+                
                 $.each(data, function(key, value) {
                     str += `<div class="col-lg-3  col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
                 <div class="d-flex">
