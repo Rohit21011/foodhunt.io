@@ -1253,3 +1253,104 @@ font-family: "Poppins", sans-serif;
 font-weight: bold;
 
  }
+ .product-image-segment{
+   border: 1px solid #ebebeb;
+   height: auto;
+   width:90%;
+   position: relative;
+   left: 30px;
+   border-radius: 30px;
+   
+ }
+ .product-image-background:before{
+  content: "";
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   bottom: 10px;
+   left: 10px;
+   height: 95%;
+   width: 95%;
+   border-radius: 30px;
+   background-color: #f7f4ef;
+   opacity: 0.6;
+ }
+ .prod-description{
+   position: relative;
+   top:20px;
+  font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: #808080;
+    font-size:13px;
+    letter-spacing:1px;
+    word-spacing:5px;
+
+ }
+ .add-to-cart-product-btn{
+text-align: center;
+width: 70%;
+float: left;
+font-weight: bold;
+border-radius: 10px !important;
+ }
+ .prod-wishlist{
+   display: inline;
+  position: relative;
+  top: 10px;
+  left: 20px;
+  text-align: center;
+   padding: 12px 18px 12px 18px;
+   background-color: #ebebeb;
+   color: white;
+   border-radius: 10px;
+
+ }
+ .prod-wishlist i:hover{
+color:#ffc107;
+transition: all 0.3s ease;
+
+ }
+ .horizontal-line::before{
+  content: '';
+    display: table;
+    border: 1px solid #ebebeb;
+    width: 100%;
+    position: relative;
+    top: -15px;
+ }
+ .horizontal-line::after{
+  content: '';
+    display: table;
+    border: 1px solid #ebebeb;
+    width: 100%;
+    position: relative;
+    top: 15px;
+ }
+ .point-list {
+  position: relative;
+  left: 4px;
+   font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  color: #808080;
+  font-size:13px;
+  letter-spacing:1px;
+  word-spacing:5px;
+  line-height: 190%;
+ }
+ .point-list li::before{
+  content: "-";
+  font-size: 16px;
+  padding: 6px;  
+
+ }
+ .imp-points::after{
+content: "";
+display: table;
+width: 100%;
+border: 1px solid #ebebeb;
+position: relative;
+top: 20px;
+ }
+ 
+ 
+

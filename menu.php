@@ -91,7 +91,7 @@
                     console.log(data);
                     $.each(data, function(key, value) {
                         str += `<div class="ml-1 mt-5 col-lg-2 col-md-3 col-sm-5 col-9  menu-card">
-                <img src="image/${value.menu_image}" class="mt-5 set-height">
+                <a href="product_details.php"><img src="image/${value.menu_image}" class="mt-5 set-height"></a>
                 <i class="far fa-heart wishlist" prod_id="${value.menu_id}"></i>
 
                 <a href=""><i class="fas fa-shopping-basket  menu-cart" id="${value.menu_id}"></i></a>

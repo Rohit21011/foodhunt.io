@@ -6,7 +6,7 @@ $sql=mysqli_query($connect,$query) or die("connection");
 $output="<ul class='search-list'>";
 if(mysqli_num_rows($sql)>0){
     while($row=mysqli_fetch_assoc($sql)){
-        $output.="<li><a href=''>{$row['product_name']}</a></li>";
+        $output.="<li><a href='product_details.php'>{$row['product_name']}</a></li>";
 
     }
 }

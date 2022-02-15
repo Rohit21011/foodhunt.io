@@ -22,7 +22,7 @@ $(document).ready(function() {
                             <div class="row div-background">
                                 <div class=" col-10   div-col" id="pizza-image">
                                
-                                    <img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> 
+                                    <a href="product_details.php"><img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> </a>
                                 </div>
                                 
                                 <div class=" col-2 wishlist">

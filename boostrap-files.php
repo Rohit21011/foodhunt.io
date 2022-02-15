@@ -29,67 +29,7 @@
     
 
 
-    <!-- <script>
-    //search product function
-    $(document).ready(function() {
-
-        $("#search_text").keypress(function() {
-            load_data();
-
-            function load_data(query) {
-                $.ajax({
-                    url: "fetch2.php",
-                    method: "post",
-                    data: {
-                        query: query
-                    },
-                    success: function(data) {
-                        $('#result').html(data);
-                    }
-                });
-            }
-
-            $('#search_text').keyup(function() {
-                var search = $(this).val();
-                if (search != '') {
-                    load_data(search);
-                } else {
-                    $('#result').html(data);
-                }
-            });
-        });
-    });
-
-    //hotel search
-    $(document).ready(function() {
-
-        $("#search_hotel").keypress(function() {
-            load_data();
-
-            function load_data(query) {
-                $.ajax({
-                    url: "fetch.php",
-                    method: "post",
-                    data: {
-                        query: query
-                    },
-                    success: function(data) {
-                        $('#resulthotel').html(data);
-                    }
-                });
-            }
-
-            $('#search_hotel').keyup(function() {
-                var search = $(this).val();
-                if (search != '') {
-                    load_data(search);
-                } else {
-                    load_data();
-                }
-            });
-        });
-    });
-    </script> -->
+   
 
     <style>
     body {

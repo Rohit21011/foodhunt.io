@@ -136,13 +136,7 @@ $(document).ready(function() {
 
                 success: function(data) {
                     console.log(data);
-                    // var str = "";
-                    // console.log(data)
-                    // $.each(data, function(key, value) {
-
-                    //     str += `<li>${value.product_name}</li>`;
-
-                    // });
+                  
                     $("#show-search ").fadeIn("fast").html(data);
 
 

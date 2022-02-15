@@ -48,7 +48,7 @@
                     str += `<div class="col-lg-3  col-md-5 mt-3 col-sm-2 col-10 wishlist-cards">
                 <div class="d-flex">
 
-                    <img width="200px" height="200px" src="image/${value.product_image}" alt="">
+                   <a href="product_details.php"> <img width="200px" height="200px" src="image/${value.product_image}" alt=""></a>
 
                     <div class="mt-5 ml-2">
                         <p class="heading-h3">${value.product_name}</p>
