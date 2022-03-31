@@ -91,7 +91,7 @@
                     console.log(data);
                     $.each(data, function(key, value) {
                         str += `<div class="ml-1 mt-5 col-lg-2 col-md-3 col-sm-5 col-9  menu-card">
-                <a href="product_details.php"><img src="image/${value.menu_image}" class="mt-5 set-height"></a>
+                <a href="#"><img src="image/${value.menu_image}" class="mt-5 set-height" prod_id="${value.menu_id}"></a>
                 <i class="far fa-heart wishlist" prod_id="${value.menu_id}"></i>
 
                 <a href=""><i class="fas fa-shopping-basket  menu-cart" id="${value.menu_id}"></i></a>
@@ -202,6 +202,15 @@
 
         });
     });
+    $(document).on("click","a img" ,function(){
+var category="menu";
+var prod_id = $(this).attr("prod_id");
+console.log(prod_id);
+var url="product_details.php";
+window.open(url+"?id="+prod_id+"&type=menu","_parent");
+
+});
+
     </script>
     <script src="form/js/fetch-wishlist.js"></script>
 </body>

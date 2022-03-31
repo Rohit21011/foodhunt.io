@@ -1,12 +1,12 @@
 <?php
 include("connect.php");
 $search=$_POST['search'];
-$query="SELECT DISTINCT(product_name) FROM product_details WHERE product_name LIKE '%{$search}%'";
+$query="SELECT DISTINCT(product_name),product_id FROM product_details WHERE product_name LIKE '%{$search}%'";
 $sql=mysqli_query($connect,$query) or die("connection");
 $output="<ul class='search-list'>";
 if(mysqli_num_rows($sql)>0){
     while($row=mysqli_fetch_assoc($sql)){
-        $output.="<li><a href='product_details.php'>{$row['product_name']}</a></li>";
+        $output.="<li><a href='product_details.php?id={$row['product_id']}&type=pizza'>{$row['product_name']}</a></li>";
 
     }
 }

@@ -22,7 +22,7 @@ $(document).ready(function() {
                             <div class="row div-background">
                                 <div class=" col-10   div-col" id="pizza-image">
                                
-                                    <a href="product_details.php"><img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}"> </a>
+                                    <a href="#"  ><img style="border-radius:140px" width="260px" height="260px" src="image/${value.product_image}" prod_id="${value.product_id}" > </a>
                                 </div>
                                 
                                 <div class=" col-2 wishlist">
@@ -90,6 +90,15 @@ $(document).ready(function() {
         getData(category,display);
     }
     nonveg();
+
+    $(document).on("click","a img" ,function(){
+
+        var prod_id = $(this).attr("prod_id");
+console.log(prod_id);
+var url="product_details.php";
+window.open(url+"?id="+prod_id+"&type=pizza","_parent");
+
+    });
 
 
 });
